@@ -1,0 +1,1449 @@
+{
+	"info": {
+		"_postman_id": "8a0a5bdd-2b03-4361-b758-9af2f44cd23f",
+		"name": "Collection Serverest",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "12872689"
+	},
+	"item": [
+		{
+			"name": "Usuários",
+			"item": [
+				{
+					"name": "Usuarios",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Tempo de Resposta é menor que 200ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/usuarios",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"usuarios"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Usuário ID inexistente",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 400\", function () {\r",
+									"    pm.response.to.have.status(400);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/usuarios/0uxuPY0cbmQhpEz1666",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"usuarios",
+								"0uxuPY0cbmQhpEz1666"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Login",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response body contains authorization\", function () {\r",
+									"    pm.expect(pm.response.text()).to.include(\"authorization\");\r",
+									"});\r",
+									"\r",
+									"var jsonData = pm.response.json();\r",
+									"var a = jsonData.authorization;\r",
+									"pm.globals.set(\"authorization\", a);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"email\": \"fulano@qa.com\",\r\n  \"password\": \"teste\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/login",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Login e-mail sem arroba",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 400\", function () {\r",
+									"    pm.response.to.have.status(400);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"email\": \"fulanoqa.com\",\r\n  \"password\": \"teste\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/login",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Cadastrar Usuário",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 201\", function () {\r",
+									"    pm.response.to.have.status(201);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response time is less than 200ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(200);\r",
+									"});\r",
+									"\r",
+									"var jsonData = pm.response.json();\r",
+									"var a = jsonData._id;\r",
+									"pm.globals.set(\"id_usuario\", a);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"nome\": \"{{$randomFullName}}\",\r\n  \"email\": \"{{$randomEmail}}\",\r\n  \"password\": \"{{$randomPassword}}\",\r\n  \"administrador\": \"{{$randomBoolean}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/usuarios",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"usuarios"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Usuário por ID",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response time is less than 200ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/usuarios/{{id_usuario}}",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"usuarios",
+								"{{id_usuario}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Editar Usuário",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Produto alterado com sucesso\", function(){\r",
+									"let responseJson = pm.response.json()\r",
+									"pm.expect(responseJson.message).to.eql(\"Registro alterado com sucesso\")\r",
+									"})"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\"nome\": \"{{$randomFullName}}\",\r\n\"email\": \"{{$randomEmail}}\",\r\n\"password\": \"{{$randomPassword}}\",\r\n\"administrador\": \"true\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/usuarios/{{id_usuario}}",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"usuarios",
+								"{{id_usuario}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Deletar Usuário",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Produto alterado com sucesso\", function(){\r",
+									"let responseJson = pm.response.json()\r",
+									"pm.expect(responseJson.message).to.eql(\"Registro excluído com sucesso\")\r",
+									"})"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/usuarios/{{id_usuario}}",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"usuarios",
+								"{{id_usuario}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Usuário por ID pós exclusão",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(400);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Produto alterado com sucesso\", function(){\r",
+									"let responseJson = pm.response.json()\r",
+									"pm.expect(responseJson.message).to.eql(\"Usuário não encontrado\")\r",
+									"})"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/usuarios/{{id_usuario}}",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"usuarios",
+								"{{id_usuario}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Produtos",
+			"item": [
+				{
+					"name": "Produtos",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/produtos",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"produtos"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add Produto",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 201\", function () {\r",
+									"    pm.response.to.have.status(201);\r",
+									"});\r",
+									"\r",
+									"var jsonData = pm.response.json();\r",
+									"var a = jsonData._id;\r",
+									"pm.globals.set(\"id_produto\", a);\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"var mensagem = \"Iniciando testes de cadastro de Produtos\";\r",
+									"console.log(mensagem);\r",
+									"\r",
+									"const postRequest = {\r",
+									"    url: pm.environment.get(\"baseURL\") + \"/login\",\r",
+									"    method: \"POST\",\r",
+									"    body: {\r",
+									"        mode: \"raw\",\r",
+									"        options: {\r",
+									"            raw: {\r",
+									"                language: \"json\"\r",
+									"            }\r",
+									"        },\r",
+									"        raw: JSON.stringify ({\r",
+									"            email: \"fulano@qa.com\",\r",
+									"            password: \"teste\"\r",
+									"        })\r",
+									"    }\r",
+									"}\r",
+									"\r",
+									"pm.sendRequest(postRequest, function(err, res){\r",
+									"    console.log(res.json())\r",
+									"\r",
+									"    //refinando a saída dos dados. \r",
+									"\r",
+									"    var respostaJson = res.json()\r",
+									"    var autenticacao = respostaJson[\"authorization\"].split(\" \");\r",
+									"    console.log(autenticacao[1]);\r",
+									"    pm.globals.set(\"token01\", autenticacao[1]);\r",
+									"})"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token01}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"nome\": \"{{$randomProductName}}\",\r\n  \"preco\": {{$randomInt}},\r\n  \"descricao\": \"{{$randomProduct}}\",\r\n  \"quantidade\": {{$randomInt}}\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/produtos/",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"produtos",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Produtos por ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/produtos/{{id_produto}}",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"produtos",
+								"{{id_produto}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Edita Produto",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"var mensagem = \"Iniciando testes de cadastro de Produtos\";\r",
+									"console.log(mensagem);\r",
+									"\r",
+									"const postRequest = {\r",
+									"    url: pm.environment.get(\"baseURL\") + \"/login\",\r",
+									"    method: \"POST\",\r",
+									"    body: {\r",
+									"        mode: \"raw\",\r",
+									"        options: {\r",
+									"            raw: {\r",
+									"                language: \"json\"\r",
+									"            }\r",
+									"        },\r",
+									"        raw: JSON.stringify ({\r",
+									"            email: \"fulano@qa.com\",\r",
+									"            password: \"teste\"\r",
+									"        })\r",
+									"    }\r",
+									"}\r",
+									"\r",
+									"pm.sendRequest(postRequest, function(err, res){\r",
+									"    console.log(res.json())\r",
+									"\r",
+									"    //refinando a saída dos dados. \r",
+									"\r",
+									"    var respostaJson = res.json()\r",
+									"    var autenticacao = respostaJson[\"authorization\"].split(\" \");\r",
+									"    console.log(autenticacao[1]);\r",
+									"    pm.globals.set(\"token01\", autenticacao[1]);\r",
+									"})"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Código do Status é 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Produto alterado com sucesso\", function(){\r",
+									"let responseJson = pm.response.json()\r",
+									"pm.expect(responseJson.message).to.eql(\"Registro alterado com sucesso\")\r",
+									"})\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token01}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"nome\": \"{{$randomProductName}}\",\r\n  \"preco\": {{$randomInt}},\r\n  \"descricao\": \"{{$randomProduct}}\",\r\n  \"quantidade\": {{$randomInt}}\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/produtos/{{id_produto}}",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"produtos",
+								"{{id_produto}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Produto",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"var mensagem = \"Iniciando testes de cadastro de Produtos\";\r",
+									"console.log(mensagem);\r",
+									"\r",
+									"const postRequest = {\r",
+									"    url: pm.environment.get(\"baseURL\") + \"/login\",\r",
+									"    method: \"POST\",\r",
+									"    body: {\r",
+									"        mode: \"raw\",\r",
+									"        options: {\r",
+									"            raw: {\r",
+									"                language: \"json\"\r",
+									"            }\r",
+									"        },\r",
+									"        raw: JSON.stringify ({\r",
+									"            email: \"fulano@qa.com\",\r",
+									"            password: \"teste\"\r",
+									"        })\r",
+									"    }\r",
+									"}\r",
+									"\r",
+									"pm.sendRequest(postRequest, function(err, res){\r",
+									"    console.log(res.json())\r",
+									"\r",
+									"    //refinando a saída dos dados. \r",
+									"\r",
+									"    var respostaJson = res.json()\r",
+									"    var autenticacao = respostaJson[\"authorization\"].split(\" \");\r",
+									"    console.log(autenticacao[1]);\r",
+									"    pm.globals.set(\"token01\", autenticacao[1]);\r",
+									"})"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Código do Status é 200 ou 201\", function () {\r",
+									"    pm.response.to.have.status(200, 201);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Produto excluído com sucesso\", function(){\r",
+									"let responseJson = pm.response.json()\r",
+									"pm.expect(responseJson.message).to.eql(\"Registro excluído com sucesso\")\r",
+									"})"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token01}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/produtos/{{id_produto}}",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"produtos",
+								"{{id_produto}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Carrinhos",
+			"item": [
+				{
+					"name": "Carrinhos",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/carrinhos",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"carrinhos"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add Produto1 Carrinho",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 201\", function () {\r",
+									"    pm.response.to.have.status(201);\r",
+									"});\r",
+									"\r",
+									"var jsonData = pm.response.json();\r",
+									"var a = jsonData._id;\r",
+									"pm.globals.set(\"id_produtoCar1\", a);\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"var mensagem = \"Iniciando testes de cadastro de Produtos\";\r",
+									"console.log(mensagem);\r",
+									"\r",
+									"const postRequest = {\r",
+									"    url: pm.environment.get(\"baseURL\") + \"/login\",\r",
+									"    method: \"POST\",\r",
+									"    body: {\r",
+									"        mode: \"raw\",\r",
+									"        options: {\r",
+									"            raw: {\r",
+									"                language: \"json\"\r",
+									"            }\r",
+									"        },\r",
+									"        raw: JSON.stringify ({\r",
+									"            email: \"fulano@qa.com\",\r",
+									"            password: \"teste\"\r",
+									"        })\r",
+									"    }\r",
+									"}\r",
+									"\r",
+									"pm.sendRequest(postRequest, function(err, res){\r",
+									"    console.log(res.json())\r",
+									"\r",
+									"    //refinando a saída dos dados. \r",
+									"\r",
+									"    var respostaJson = res.json()\r",
+									"    var autenticacao = respostaJson[\"authorization\"].split(\" \");\r",
+									"    console.log(autenticacao[1]);\r",
+									"    pm.globals.set(\"token01\", autenticacao[1]);\r",
+									"})"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token01}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"nome\": \"{{$randomProductName}}\",\r\n  \"preco\": {{$randomInt}},\r\n  \"descricao\": \"{{$randomProduct}}\",\r\n  \"quantidade\": {{$randomInt}}\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/produtos/",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"produtos",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add Produto2 Carrinho",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 201\", function () {\r",
+									"    pm.response.to.have.status(201);\r",
+									"});\r",
+									"\r",
+									"var jsonData = pm.response.json();\r",
+									"var a = jsonData._id;\r",
+									"pm.globals.set(\"id_produtoCar2\", a);\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"var mensagem = \"Iniciando testes de cadastro de Produtos\";\r",
+									"console.log(mensagem);\r",
+									"\r",
+									"const postRequest = {\r",
+									"    url: pm.environment.get(\"baseURL\") + \"/login\",\r",
+									"    method: \"POST\",\r",
+									"    body: {\r",
+									"        mode: \"raw\",\r",
+									"        options: {\r",
+									"            raw: {\r",
+									"                language: \"json\"\r",
+									"            }\r",
+									"        },\r",
+									"        raw: JSON.stringify ({\r",
+									"            email: \"fulano@qa.com\",\r",
+									"            password: \"teste\"\r",
+									"        })\r",
+									"    }\r",
+									"}\r",
+									"\r",
+									"pm.sendRequest(postRequest, function(err, res){\r",
+									"    console.log(res.json())\r",
+									"\r",
+									"    //refinando a saída dos dados. \r",
+									"\r",
+									"    var respostaJson = res.json()\r",
+									"    var autenticacao = respostaJson[\"authorization\"].split(\" \");\r",
+									"    console.log(autenticacao[1]);\r",
+									"    pm.globals.set(\"token01\", autenticacao[1]);\r",
+									"})"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token01}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"nome\": \"{{$randomProductName}}\",\r\n  \"preco\": {{$randomInt}},\r\n  \"descricao\": \"{{$randomProduct}}\",\r\n  \"quantidade\": {{$randomInt}}\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/produtos/",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"produtos",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add Carrinho",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"var mensagem = \"Iniciando testes de criação de Carrinhos de Compra\";\r",
+									"console.log(mensagem);\r",
+									"\r",
+									"const postRequest = {\r",
+									"    url: pm.environment.get(\"baseURL\") + \"/login\",\r",
+									"    method: \"POST\",\r",
+									"    body: {\r",
+									"        mode: \"raw\",\r",
+									"        options: {\r",
+									"            raw: {\r",
+									"                language: \"json\"\r",
+									"            }\r",
+									"        },\r",
+									"        raw: JSON.stringify ({\r",
+									"            email: \"fulano@qa.com\",\r",
+									"            password: \"teste\"\r",
+									"        })\r",
+									"    }\r",
+									"}\r",
+									"\r",
+									"pm.sendRequest(postRequest, function(err, res){\r",
+									"    console.log(res.json())\r",
+									"\r",
+									"    //refinando a saída dos dados. \r",
+									"\r",
+									"    var respostaJson = res.json()\r",
+									"    var autenticacao = respostaJson[\"authorization\"].split(\" \");\r",
+									"    console.log(autenticacao[1]);\r",
+									"    pm.globals.set(\"token01\", autenticacao[1]);\r",
+									"})\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Código do Status é 201\", function () {\r",
+									"    pm.response.to.have.status(201);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Cadastro Realizado com Sucesso\", function(){\r",
+									"let responseJson = pm.response.json()\r",
+									"pm.expect(responseJson.message).to.eql(\"Cadastro realizado com sucesso\")\r",
+									"})\r",
+									"\r",
+									"var jsonData = pm.response.json();\r",
+									"var a = jsonData._id;\r",
+									"pm.globals.set(\"id_carrinho\", a);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token01}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"produtos\": [\r\n    {\r\n      \"idProduto\": \"{{id_produtoCar1}}\",\r\n      \"quantidade\": 5\r\n    },\r\n    {\r\n      \"idProduto\": \"{{id_produtoCar2}}\",\r\n      \"quantidade\": 3\r\n    }\r\n  ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/carrinhos",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"carrinhos"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Produto no Carrinho",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"var mensagem = \"Iniciando testes de cadastro de Produtos\";\r",
+									"console.log(mensagem);\r",
+									"\r",
+									"const postRequest = {\r",
+									"    url: pm.environment.get(\"baseURL\") + \"/login\",\r",
+									"    method: \"POST\",\r",
+									"    body: {\r",
+									"        mode: \"raw\",\r",
+									"        options: {\r",
+									"            raw: {\r",
+									"                language: \"json\"\r",
+									"            }\r",
+									"        },\r",
+									"        raw: JSON.stringify ({\r",
+									"            email: \"fulano@qa.com\",\r",
+									"            password: \"teste\"\r",
+									"        })\r",
+									"    }\r",
+									"}\r",
+									"\r",
+									"pm.sendRequest(postRequest, function(err, res){\r",
+									"    console.log(res.json())\r",
+									"\r",
+									"    //refinando a saída dos dados. \r",
+									"\r",
+									"    var respostaJson = res.json()\r",
+									"    var autenticacao = respostaJson[\"authorization\"].split(\" \");\r",
+									"    console.log(autenticacao[1]);\r",
+									"    pm.globals.set(\"token01\", autenticacao[1]);\r",
+									"})"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Código do Status é 400\", function () {\r",
+									"    pm.response.to.have.status(400);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Produto excluído com sucesso\", function(){\r",
+									"let responseJson = pm.response.json()\r",
+									"pm.expect(responseJson.message).to.eql(\"Não é permitido excluir produto que faz parte de carrinho\")\r",
+									"})"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token01}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/produtos/{{id_produtoCar1}}",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"produtos",
+								"{{id_produtoCar1}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Carrinhos por ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/carrinhos/{{id_carrinho}}",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"carrinhos",
+								"{{id_carrinho}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Concluir Compra",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"var mensagem = \"Iniciando testes de cadastro de Produtos\";\r",
+									"console.log(mensagem);\r",
+									"\r",
+									"const postRequest = {\r",
+									"    url: pm.environment.get(\"baseURL\") + \"/login\",\r",
+									"    method: \"POST\",\r",
+									"    body: {\r",
+									"        mode: \"raw\",\r",
+									"        options: {\r",
+									"            raw: {\r",
+									"                language: \"json\"\r",
+									"            }\r",
+									"        },\r",
+									"        raw: JSON.stringify ({\r",
+									"            email: \"fulano@qa.com\",\r",
+									"            password: \"teste\"\r",
+									"        })\r",
+									"    }\r",
+									"}\r",
+									"\r",
+									"pm.sendRequest(postRequest, function(err, res){\r",
+									"    console.log(res.json())\r",
+									"\r",
+									"    //refinando a saída dos dados. \r",
+									"\r",
+									"    var respostaJson = res.json()\r",
+									"    var autenticacao = respostaJson[\"authorization\"].split(\" \");\r",
+									"    console.log(autenticacao[1]);\r",
+									"    pm.globals.set(\"token01\", autenticacao[1]);\r",
+									"})"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token01}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/carrinhos/concluir-compra",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"carrinhos",
+								"concluir-compra"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add Carrinho Cancelamento Compra",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"var mensagem = \"Iniciando testes de criação de Carrinhos de Compra\";\r",
+									"console.log(mensagem);\r",
+									"\r",
+									"const postRequest = {\r",
+									"    url: pm.environment.get(\"baseURL\") + \"/login\",\r",
+									"    method: \"POST\",\r",
+									"    body: {\r",
+									"        mode: \"raw\",\r",
+									"        options: {\r",
+									"            raw: {\r",
+									"                language: \"json\"\r",
+									"            }\r",
+									"        },\r",
+									"        raw: JSON.stringify ({\r",
+									"            email: \"fulano@qa.com\",\r",
+									"            password: \"teste\"\r",
+									"        })\r",
+									"    }\r",
+									"}\r",
+									"\r",
+									"pm.sendRequest(postRequest, function(err, res){\r",
+									"    console.log(res.json())\r",
+									"\r",
+									"    //refinando a saída dos dados. \r",
+									"\r",
+									"    var respostaJson = res.json()\r",
+									"    var autenticacao = respostaJson[\"authorization\"].split(\" \");\r",
+									"    console.log(autenticacao[1]);\r",
+									"    pm.globals.set(\"token01\", autenticacao[1]);\r",
+									"})\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Código do Status é 201\", function () {\r",
+									"    pm.response.to.have.status(201);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Cadastro Realizado com Sucesso\", function(){\r",
+									"let responseJson = pm.response.json()\r",
+									"pm.expect(responseJson.message).to.eql(\"Cadastro realizado com sucesso\")\r",
+									"})\r",
+									"\r",
+									"var jsonData = pm.response.json();\r",
+									"var a = jsonData._id;\r",
+									"pm.globals.set(\"id_carrinho2\", a);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token01}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"produtos\": [\r\n    {\r\n      \"idProduto\": \"{{id_produtoCar1}}\",\r\n      \"quantidade\": 5\r\n    },\r\n    {\r\n      \"idProduto\": \"{{id_produtoCar2}}\",\r\n      \"quantidade\": 3\r\n    }\r\n  ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/carrinhos",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"carrinhos"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add Carrinho Repetido",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"var mensagem = \"Iniciando testes de criação de Carrinhos de Compra\";\r",
+									"console.log(mensagem);\r",
+									"\r",
+									"const postRequest = {\r",
+									"    url: pm.environment.get(\"baseURL\") + \"/login\",\r",
+									"    method: \"POST\",\r",
+									"    body: {\r",
+									"        mode: \"raw\",\r",
+									"        options: {\r",
+									"            raw: {\r",
+									"                language: \"json\"\r",
+									"            }\r",
+									"        },\r",
+									"        raw: JSON.stringify ({\r",
+									"            email: \"fulano@qa.com\",\r",
+									"            password: \"teste\"\r",
+									"        })\r",
+									"    }\r",
+									"}\r",
+									"\r",
+									"pm.sendRequest(postRequest, function(err, res){\r",
+									"    console.log(res.json())\r",
+									"\r",
+									"    //refinando a saída dos dados. \r",
+									"\r",
+									"    var respostaJson = res.json()\r",
+									"    var autenticacao = respostaJson[\"authorization\"].split(\" \");\r",
+									"    console.log(autenticacao[1]);\r",
+									"    pm.globals.set(\"token01\", autenticacao[1]);\r",
+									"})\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Código do Status é 400\", function () {\r",
+									"    pm.response.to.have.status(400);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Cadastro Realizado com Sucesso\", function(){\r",
+									"let responseJson = pm.response.json()\r",
+									"pm.expect(responseJson.message).to.eql(\"Não é permitido ter mais de 1 carrinho\")\r",
+									"})\r",
+									"\r",
+									"var jsonData = pm.response.json();\r",
+									"var a = jsonData._id;\r",
+									"pm.globals.set(\"id_carrinho2\", a);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token01}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"produtos\": [\r\n    {\r\n      \"idProduto\": \"{{id_produtoCar1}}\",\r\n      \"quantidade\": 5\r\n    },\r\n    {\r\n      \"idProduto\": \"{{id_produtoCar2}}\",\r\n      \"quantidade\": 3\r\n    }\r\n  ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/carrinhos",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"carrinhos"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Cancelar Compra",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"var mensagem = \"Iniciando testes de cadastro de Produtos\";\r",
+									"console.log(mensagem);\r",
+									"\r",
+									"const postRequest = {\r",
+									"    url: pm.environment.get(\"baseURL\") + \"/login\",\r",
+									"    method: \"POST\",\r",
+									"    body: {\r",
+									"        mode: \"raw\",\r",
+									"        options: {\r",
+									"            raw: {\r",
+									"                language: \"json\"\r",
+									"            }\r",
+									"        },\r",
+									"        raw: JSON.stringify ({\r",
+									"            email: \"fulano@qa.com\",\r",
+									"            password: \"teste\"\r",
+									"        })\r",
+									"    }\r",
+									"}\r",
+									"\r",
+									"pm.sendRequest(postRequest, function(err, res){\r",
+									"    console.log(res.json())\r",
+									"\r",
+									"    //refinando a saída dos dados. \r",
+									"\r",
+									"    var respostaJson = res.json()\r",
+									"    var autenticacao = respostaJson[\"authorization\"].split(\" \");\r",
+									"    console.log(autenticacao[1]);\r",
+									"    pm.globals.set(\"token01\", autenticacao[1]);\r",
+									"})"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Código do Status é 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Cadastro Realizado com Sucesso\", function(){\r",
+									"let responseJson = pm.response.json()\r",
+									"pm.expect(responseJson.message).to.eql(\"Registro excluído com sucesso. Estoque dos produtos reabastecido\")\r",
+									"})\r",
+									"\r",
+									"var jsonData = pm.response.json();\r",
+									"var a = jsonData._id;\r",
+									"pm.globals.set(\"id_carrinho2\", a);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token01}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/carrinhos/cancelar-compra",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"carrinhos",
+								"cancelar-compra"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

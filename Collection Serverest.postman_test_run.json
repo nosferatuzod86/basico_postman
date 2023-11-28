@@ -1,0 +1,805 @@
+{
+	"id": "8970f9ba-7249-433d-b3d7-d5dd649967bd",
+	"name": "Collection Serverest",
+	"timestamp": "2023-11-24T02:46:15.478Z",
+	"collection_id": "12872689-8a0a5bdd-2b03-4361-b758-9af2f44cd23f",
+	"folder_id": 0,
+	"environment_id": "12872689-bb211f10-2668-4099-ba6c-c63d9a65d069",
+	"totalPass": 32,
+	"delay": 0,
+	"persist": true,
+	"status": "finished",
+	"startedAt": "2023-11-24T02:46:07.225Z",
+	"totalFail": 1,
+	"results": [
+		{
+			"id": "3ace4969-4312-447c-88f3-b9f55c7758bf",
+			"name": "Usuarios",
+			"url": "https://serverest.dev/usuarios",
+			"time": 208,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status code is 200": true,
+				"Tempo de Resposta é menor que 200ms": false
+			},
+			"testPassFailCounts": {
+				"Status code is 200": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Tempo de Resposta é menor que 200ms": {
+					"pass": 0,
+					"fail": 1
+				}
+			},
+			"times": [
+				208
+			],
+			"allTests": [
+				{
+					"Status code is 200": true,
+					"Tempo de Resposta é menor que 200ms": false
+				}
+			]
+		},
+		{
+			"id": "e29a40bc-ca4c-4b8c-81d3-c7835280fa93",
+			"name": "Usuário ID inexistente",
+			"url": "https://serverest.dev/usuarios/0uxuPY0cbmQhpEz1666",
+			"time": 190,
+			"responseCode": {
+				"code": 400,
+				"name": "Bad Request"
+			},
+			"tests": {
+				"Status code is 400": true
+			},
+			"testPassFailCounts": {
+				"Status code is 400": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				190
+			],
+			"allTests": [
+				{
+					"Status code is 400": true
+				}
+			]
+		},
+		{
+			"id": "fe9b1d16-ea4a-45aa-8ff9-8bb7e8b99d72",
+			"name": "Login",
+			"url": "https://serverest.dev/login",
+			"time": 187,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status code is 200": true,
+				"Response body contains authorization": true
+			},
+			"testPassFailCounts": {
+				"Status code is 200": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Response body contains authorization": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				187
+			],
+			"allTests": [
+				{
+					"Status code is 200": true,
+					"Response body contains authorization": true
+				}
+			]
+		},
+		{
+			"id": "37cb4f32-7173-4ec7-aa11-5e9e2abb2bc0",
+			"name": "Login e-mail sem arroba",
+			"url": "https://serverest.dev/login",
+			"time": 184,
+			"responseCode": {
+				"code": 400,
+				"name": "Bad Request"
+			},
+			"tests": {
+				"Status code is 400": true
+			},
+			"testPassFailCounts": {
+				"Status code is 400": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				184
+			],
+			"allTests": [
+				{
+					"Status code is 400": true
+				}
+			]
+		},
+		{
+			"id": "99734e7a-3066-4112-88a1-0d74b56702ec",
+			"name": "Cadastrar Usuário",
+			"url": "https://serverest.dev/usuarios",
+			"time": 199,
+			"responseCode": {
+				"code": 201,
+				"name": "Created"
+			},
+			"tests": {
+				"Status code is 201": true,
+				"Response time is less than 200ms": true
+			},
+			"testPassFailCounts": {
+				"Status code is 201": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Response time is less than 200ms": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				199
+			],
+			"allTests": [
+				{
+					"Status code is 201": true,
+					"Response time is less than 200ms": true
+				}
+			]
+		},
+		{
+			"id": "f8bd5394-b5a8-4ae1-9377-c0a172d24bb3",
+			"name": "Usuário por ID",
+			"url": "https://serverest.dev/usuarios/vgqry7nenYfdv3TT",
+			"time": 185,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status code is 200": true,
+				"Response time is less than 200ms": true
+			},
+			"testPassFailCounts": {
+				"Status code is 200": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Response time is less than 200ms": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				185
+			],
+			"allTests": [
+				{
+					"Status code is 200": true,
+					"Response time is less than 200ms": true
+				}
+			]
+		},
+		{
+			"id": "7861c1b0-a028-4040-a4c5-bd2e65b06150",
+			"name": "Editar Usuário",
+			"url": "https://serverest.dev/usuarios/vgqry7nenYfdv3TT",
+			"time": 187,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status code is 200": true,
+				"Produto alterado com sucesso": true
+			},
+			"testPassFailCounts": {
+				"Status code is 200": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Produto alterado com sucesso": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				187
+			],
+			"allTests": [
+				{
+					"Status code is 200": true,
+					"Produto alterado com sucesso": true
+				}
+			]
+		},
+		{
+			"id": "1aa7cf07-6864-41f5-be1d-5697a6039807",
+			"name": "Deletar Usuário",
+			"url": "https://serverest.dev/usuarios/vgqry7nenYfdv3TT",
+			"time": 187,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status code is 200": true,
+				"Produto alterado com sucesso": true
+			},
+			"testPassFailCounts": {
+				"Status code is 200": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Produto alterado com sucesso": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				187
+			],
+			"allTests": [
+				{
+					"Status code is 200": true,
+					"Produto alterado com sucesso": true
+				}
+			]
+		},
+		{
+			"id": "f095b3cf-600e-4b94-8abf-f5c1cb9edb3d",
+			"name": "Usuário por ID pós exclusão",
+			"url": "https://serverest.dev/usuarios/vgqry7nenYfdv3TT",
+			"time": 182,
+			"responseCode": {
+				"code": 400,
+				"name": "Bad Request"
+			},
+			"tests": {
+				"Status code is 200": true,
+				"Produto alterado com sucesso": true
+			},
+			"testPassFailCounts": {
+				"Status code is 200": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Produto alterado com sucesso": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				182
+			],
+			"allTests": [
+				{
+					"Status code is 200": true,
+					"Produto alterado com sucesso": true
+				}
+			]
+		},
+		{
+			"id": "df4c43be-cc61-401c-99f2-fa52e8130e91",
+			"name": "Produtos",
+			"url": "https://serverest.dev/produtos",
+			"time": 204,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				204
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "5e036c54-d0cc-4bef-972d-c7942a53ff02",
+			"name": "Add Produto",
+			"url": "https://serverest.dev/produtos/",
+			"time": 207,
+			"responseCode": {
+				"code": 201,
+				"name": "Created"
+			},
+			"tests": {
+				"Status code is 201": true
+			},
+			"testPassFailCounts": {
+				"Status code is 201": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				207
+			],
+			"allTests": [
+				{
+					"Status code is 201": true
+				}
+			]
+		},
+		{
+			"id": "b84c180f-1516-4268-9a17-b900252fcf90",
+			"name": "Produtos por ID",
+			"url": "https://serverest.dev/produtos/ohe5QtNjO59G1dZw",
+			"time": 195,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				195
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "87eb152e-2148-407d-b6e7-ad03898a282c",
+			"name": "Edita Produto",
+			"url": "https://serverest.dev/produtos/ohe5QtNjO59G1dZw",
+			"time": 198,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Código do Status é 200": true,
+				"Produto alterado com sucesso": true
+			},
+			"testPassFailCounts": {
+				"Código do Status é 200": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Produto alterado com sucesso": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				198
+			],
+			"allTests": [
+				{
+					"Código do Status é 200": true,
+					"Produto alterado com sucesso": true
+				}
+			]
+		},
+		{
+			"id": "e88e399e-1790-487c-89a5-890ae952a457",
+			"name": "Delete Produto",
+			"url": "https://serverest.dev/produtos/ohe5QtNjO59G1dZw",
+			"time": 198,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Código do Status é 200 ou 201": true,
+				"Produto excluído com sucesso": true
+			},
+			"testPassFailCounts": {
+				"Código do Status é 200 ou 201": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Produto excluído com sucesso": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				198
+			],
+			"allTests": [
+				{
+					"Código do Status é 200 ou 201": true,
+					"Produto excluído com sucesso": true
+				}
+			]
+		},
+		{
+			"id": "7f6b1246-35de-4a97-8594-fc9388cad94b",
+			"name": "Carrinhos",
+			"url": "https://serverest.dev/carrinhos",
+			"time": 197,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				197
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "1bc0b975-4f5e-4e08-8d09-cccf6cbd4420",
+			"name": "Add Produto1 Carrinho",
+			"url": "https://serverest.dev/produtos/",
+			"time": 206,
+			"responseCode": {
+				"code": 201,
+				"name": "Created"
+			},
+			"tests": {
+				"Status code is 201": true
+			},
+			"testPassFailCounts": {
+				"Status code is 201": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				206
+			],
+			"allTests": [
+				{
+					"Status code is 201": true
+				}
+			]
+		},
+		{
+			"id": "b8df0403-fd52-4c24-ba92-f6e321c2962b",
+			"name": "Add Produto2 Carrinho",
+			"url": "https://serverest.dev/produtos/",
+			"time": 213,
+			"responseCode": {
+				"code": 201,
+				"name": "Created"
+			},
+			"tests": {
+				"Status code is 201": true
+			},
+			"testPassFailCounts": {
+				"Status code is 201": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				213
+			],
+			"allTests": [
+				{
+					"Status code is 201": true
+				}
+			]
+		},
+		{
+			"id": "d7504499-9057-4d10-b625-b544a7339257",
+			"name": "Add Carrinho",
+			"url": "https://serverest.dev/carrinhos",
+			"time": 196,
+			"responseCode": {
+				"code": 201,
+				"name": "Created"
+			},
+			"tests": {
+				"Código do Status é 201": true,
+				"Cadastro Realizado com Sucesso": true
+			},
+			"testPassFailCounts": {
+				"Código do Status é 201": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Cadastro Realizado com Sucesso": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				196
+			],
+			"allTests": [
+				{
+					"Código do Status é 201": true,
+					"Cadastro Realizado com Sucesso": true
+				}
+			]
+		},
+		{
+			"id": "3c45fac5-069a-4c3d-9914-f3504ac0e47e",
+			"name": "Delete Produto no Carrinho",
+			"url": "https://serverest.dev/produtos/TZ4vq3BLzKynvpXU",
+			"time": 189,
+			"responseCode": {
+				"code": 400,
+				"name": "Bad Request"
+			},
+			"tests": {
+				"Código do Status é 400": true,
+				"Produto excluído com sucesso": true
+			},
+			"testPassFailCounts": {
+				"Código do Status é 400": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Produto excluído com sucesso": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				189
+			],
+			"allTests": [
+				{
+					"Código do Status é 400": true,
+					"Produto excluído com sucesso": true
+				}
+			]
+		},
+		{
+			"id": "382a8f88-da7b-404a-b85e-dadbabd317fd",
+			"name": "Carrinhos por ID",
+			"url": "https://serverest.dev/carrinhos/GngUVlET6SBICctw",
+			"time": 192,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				192
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "5b5ecc81-1061-44d2-b3d8-bc7c2f836905",
+			"name": "Concluir Compra",
+			"url": "https://serverest.dev/carrinhos/concluir-compra",
+			"time": 184,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				184
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "66e017c9-40e4-47f0-8d26-f750fe8bf0c5",
+			"name": "Add Carrinho Cancelamento Compra",
+			"url": "https://serverest.dev/carrinhos",
+			"time": 184,
+			"responseCode": {
+				"code": 201,
+				"name": "Created"
+			},
+			"tests": {
+				"Código do Status é 201": true,
+				"Cadastro Realizado com Sucesso": true
+			},
+			"testPassFailCounts": {
+				"Código do Status é 201": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Cadastro Realizado com Sucesso": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				184
+			],
+			"allTests": [
+				{
+					"Código do Status é 201": true,
+					"Cadastro Realizado com Sucesso": true
+				}
+			]
+		},
+		{
+			"id": "924e3429-f0ba-48af-9774-9da6838575bb",
+			"name": "Add Carrinho Repetido",
+			"url": "https://serverest.dev/carrinhos",
+			"time": 185,
+			"responseCode": {
+				"code": 400,
+				"name": "Bad Request"
+			},
+			"tests": {
+				"Código do Status é 400": true,
+				"Cadastro Realizado com Sucesso": true
+			},
+			"testPassFailCounts": {
+				"Código do Status é 400": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Cadastro Realizado com Sucesso": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				185
+			],
+			"allTests": [
+				{
+					"Código do Status é 400": true,
+					"Cadastro Realizado com Sucesso": true
+				}
+			]
+		},
+		{
+			"id": "7180ff1b-bb9b-4548-b45b-9d95ae780476",
+			"name": "Cancelar Compra",
+			"url": "https://serverest.dev/carrinhos/cancelar-compra",
+			"time": 191,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Código do Status é 200": true,
+				"Cadastro Realizado com Sucesso": true
+			},
+			"testPassFailCounts": {
+				"Código do Status é 200": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Cadastro Realizado com Sucesso": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				191
+			],
+			"allTests": [
+				{
+					"Código do Status é 200": true,
+					"Cadastro Realizado com Sucesso": true
+				}
+			]
+		}
+	],
+	"count": 1,
+	"totalTime": 4648,
+	"collection": {
+		"requests": [
+			{
+				"id": "3ace4969-4312-447c-88f3-b9f55c7758bf",
+				"method": "GET"
+			},
+			{
+				"id": "e29a40bc-ca4c-4b8c-81d3-c7835280fa93",
+				"method": "GET"
+			},
+			{
+				"id": "fe9b1d16-ea4a-45aa-8ff9-8bb7e8b99d72",
+				"method": "POST"
+			},
+			{
+				"id": "37cb4f32-7173-4ec7-aa11-5e9e2abb2bc0",
+				"method": "POST"
+			},
+			{
+				"id": "99734e7a-3066-4112-88a1-0d74b56702ec",
+				"method": "POST"
+			},
+			{
+				"id": "f8bd5394-b5a8-4ae1-9377-c0a172d24bb3",
+				"method": "GET"
+			},
+			{
+				"id": "7861c1b0-a028-4040-a4c5-bd2e65b06150",
+				"method": "PUT"
+			},
+			{
+				"id": "1aa7cf07-6864-41f5-be1d-5697a6039807",
+				"method": "DELETE"
+			},
+			{
+				"id": "f095b3cf-600e-4b94-8abf-f5c1cb9edb3d",
+				"method": "GET"
+			},
+			{
+				"id": "df4c43be-cc61-401c-99f2-fa52e8130e91",
+				"method": "GET"
+			},
+			{
+				"id": "5e036c54-d0cc-4bef-972d-c7942a53ff02",
+				"method": "POST"
+			},
+			{
+				"id": "b84c180f-1516-4268-9a17-b900252fcf90",
+				"method": "GET"
+			},
+			{
+				"id": "87eb152e-2148-407d-b6e7-ad03898a282c",
+				"method": "PUT"
+			},
+			{
+				"id": "e88e399e-1790-487c-89a5-890ae952a457",
+				"method": "DELETE"
+			},
+			{
+				"id": "7f6b1246-35de-4a97-8594-fc9388cad94b",
+				"method": "GET"
+			},
+			{
+				"id": "1bc0b975-4f5e-4e08-8d09-cccf6cbd4420",
+				"method": "POST"
+			},
+			{
+				"id": "b8df0403-fd52-4c24-ba92-f6e321c2962b",
+				"method": "POST"
+			},
+			{
+				"id": "d7504499-9057-4d10-b625-b544a7339257",
+				"method": "POST"
+			},
+			{
+				"id": "3c45fac5-069a-4c3d-9914-f3504ac0e47e",
+				"method": "DELETE"
+			},
+			{
+				"id": "382a8f88-da7b-404a-b85e-dadbabd317fd",
+				"method": "GET"
+			},
+			{
+				"id": "5b5ecc81-1061-44d2-b3d8-bc7c2f836905",
+				"method": "DELETE"
+			},
+			{
+				"id": "66e017c9-40e4-47f0-8d26-f750fe8bf0c5",
+				"method": "POST"
+			},
+			{
+				"id": "924e3429-f0ba-48af-9774-9da6838575bb",
+				"method": "POST"
+			},
+			{
+				"id": "7180ff1b-bb9b-4548-b45b-9d95ae780476",
+				"method": "DELETE"
+			}
+		]
+	}
+}
